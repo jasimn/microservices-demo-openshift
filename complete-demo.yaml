@@ -182,6 +182,8 @@ spec:
       containers:
       - name: catalogue
         image: mosuke5/sockshop-catalogue:a04de03
+        command: ["/bin/sh"]
+        args: ["-c", "chmod +x /app && /app"]
         #image: weaveworksdemos/catalogue:0.3.5
         #env:
         #- name: ZIPKIN
@@ -507,6 +509,9 @@ spec:
       containers:
       - name: shipping
         image: weaveworksdemos/shipping:0.4.8
+        securityContext:
+         runAsUser: 1001
+         allowPrivilegeEscalation: false
         env:
          - name: ZIPKIN
            value: zipkin
